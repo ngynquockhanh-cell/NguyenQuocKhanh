@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Transcript - Nguyen Quoc Khanh</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            color: #111111;
+            line-height: 1.5;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px 45px;
+            border: 1px solid #d4d4d4;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #111111;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+
+        .university-info h2 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111111;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .university-info p {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333333;
+            margin-top: 2px;
+        }
+
+        .export-date {
+            font-size: 13px;
+            color: #333333;
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 16px;
+        }
+
+        /* Title */
+        .title-section {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .title-section h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #111111;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .title-section p {
+            font-size: 13px;
+            color: #555555;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        /* Student Info Grid */
+        .student-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 28px;
+            background-color: #fafafa;
+            border: 1px solid #999999;
+            padding: 14px 20px;
+            margin-bottom: 24px;
+            font-size: 13.5px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dotted #bbbbbb;
+            padding-bottom: 5px;
+        }
+
+        .info-item:nth-last-child(-n+2) {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            color: #444444;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #111111;
+            font-weight: 700;
+        }
+
+        /* Academic Summary */
+        .summary-section {
+            margin-bottom: 28px;
+        }
+
+        .summary-title {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #111111;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .card {
+            background-color: #fafafa;
+            border: 1px solid #777777;
+            padding: 12px 16px;
+            text-align: center;
+        }
+
+        .card-label {
+            font-size: 11.5px;
+            color: #444444;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .card-value {
+            font-size: 21px;
+            font-weight: 700;
+            color: #111111;
+            margin-top: 4px;
+        }
+
+        /* Semester Blocks */
+        .semester-block {
+            margin-bottom: 26px;
+            page-break-inside: avoid;
+        }
+
+        .semester-header {
+            background-color: #eeeeee;
+            color: #111111;
+            border: 1px solid #666666;
+            border-bottom: none;
+            padding: 8px 14px;
+            font-size: 13.5px;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th, td {
+            border: 1px solid #666666;
+            padding: 7px 10px;
+        }
+
+        th {
+            background-color: #f7f7f7;
+            color: #111111;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        th.course-name-col {
+            text-align: left;
+        }
+
+        td.center {
+            text-align: center;
+        }
+
+        td.course-name {
+            color: #111111;
+        }
+
+        td.grade-cell {
+            text-align: center;
+            font-weight: 700;
+            color: #111111;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+
+        /* Semester Footer */
+        .semester-footer {
+            background-color: #fafafa;
+            border: 1px solid #666666;
+            border-top: none;
+            padding: 9px 14px;
+            font-size: 12.5px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px 12px;
+        }
+
+        .footer-stat span.label {
+            color: #444444;
+        }
+
+        .footer-stat span.val {
+            font-weight: 700;
+            color: #111111;
+        }
+
+        .year-avg {
+            grid-column: 1 / -1;
+            margin-top: 4px;
+            padding-top: 6px;
+            border-top: 1px dashed #999999;
+            font-weight: 700;
+            color: #111111;
+            text-align: right;
+        }
+
+        /* Bottom Notes & Declaration */
+        .bottom-notes {
+            margin-top: 24px;
+            padding-top: 14px;
+            border-top: 1.5px solid #111111;
+            font-size: 12.5px;
+            color: #222222;
+        }
+
+        .bottom-notes p {
+            margin-bottom: 8px;
+        }
+
+        @media print {
+            body {
+                background-color: #ffffff;
+                padding: 0;
+            }
+            .container {
+                border: none;
+                box-shadow: none;
+                padding: 15px 20px;
+                max-width: 100%;
+            }
+            .semester-header, th, .card, .semester-footer, .student-info {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="university-info">
+            <h2>Ho Chi Minh City University of Foreign Languages and Information Technology</h2>
+            <p>HUFLIT</p>
+        </div>
+        <div class="export-date">
+            Date: November 25, 2026
+        </div>
+    </div>
+
+    <!-- Title -->
+    <div class="title-section">
+        <h1>Academic Transcript</h1>
+        <p>Official Student Record</p>
+    </div>
+
+    <!-- Student Information -->
+    <div class="student-info">
+        <div class="info-item">
+            <span class="info-label">Full Name:</span>
+            <span class="info-value">NGUYEN QUOC KHANH</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Student ID:</span>
+            <span class="info-value">23DH111587</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Major:</span>
+            <span class="info-value">Software Engineering</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Academic Year:</span>
+            <span class="info-value">2023 - 2027</span>
+        </div>
+    </div>
+
+    <!-- Academic Summary -->
+    <div class="summary-section">
+        <div class="summary-title">Academic Summary</div>
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-label">Total Credits Earned</div>
+                <div class="card-value">141</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Cumulative GPA (4.0 Scale)</div>
+                <div class="card-value">2.81</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Academic Standing</div>
+                <div class="card-value">Good</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2023-2024 Semester 1 -->
+    <div class="semester-block">
+        <div class="semester-header">Academic Year 2023-2024 - Semester 1</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 6%;">No</th>
+                    <th style="width: 13%;">Course Code</th>
+                    <th class="course-name-col">Course Name</th>
+                    <th style="width: 10%;">Credits</th>
+                    <th style="width: 11%;">Score 10</th>
+                    <th style="width: 11%;">Score 4</th>
+                    <th style="width: 10%;">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">1</td>
+                    <td class="center">1010443</td>
+                    <td class="course-name">Marxist-Leninist Philosophy</td>
+                    <td class="center">3.0</td>
+                    <td class="center">4.5</td>
+                    <td class="center">1.00</td>
+                    <td class="grade-cell">D</td>
+                </tr>
+                <tr>
+                    <td class="center">2</td>
+                    <td class="center">1010663</td>
+                    <td class="course-name">General English 1</td>
+                    <td class="center">3.0</td>
+                    <td class="center">5.3</td>
+                    <td class="center">1.50</td>
+                    <td class="grade-cell">D+</td>
+                </tr>
+                <tr>
+                    <td class="center">3</td>
+                    <td class="center">1210122</td>
+                    <td class="course-name">Introduction to Information Technology</td>
+                    <td class="center">2.0</td>
+                    <td class="center">6.6</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">4</td>
+                    <td class="center">1210134</td>
+                    <td class="course-name">Introduction to Programming</td>
+                    <td class="center">4.0</td>
+                    <td class="center">5.3</td>
+                    <td class="center">1.50</td>
+                    <td class="grade-cell">D+</td>
+                </tr>
+                <tr>
+                    <td class="center">5</td>
+                    <td class="center">1221203</td>
+                    <td class="course-name">Discrete Mathematics for Computer Science</td>
+                    <td class="center">3.0</td>
+                    <td class="center">6.8</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">6</td>
+                    <td class="center">1250033</td>
+                    <td class="course-name">Calculus</td>
+                    <td class="center">3.0</td>
+                    <td class="center">5.4</td>
+                    <td class="center">1.50</td>
+                    <td class="grade-cell">D+</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="semester-footer">
+            <div class="footer-stat"><span class="label">Total Registered Credits:</span> <span class="val">22</span></div>
+            <div class="footer-stat"><span class="label">Credits Earned:</span> <span class="val">18</span></div>
+            <div class="footer-stat"><span class="label">Semester GPA:</span> <span class="val">1.69</span></div>
+            <div class="footer-stat"><span class="label">Cumulative Credits:</span> <span class="val">18</span></div>
+            <div class="footer-stat"><span class="label">Cumulative GPA:</span> <span class="val">1.69</span></div>
+            <div class="footer-stat"><span class="label">Training Score:</span> <span class="val">76.00/100 (Good)</span></div>
+        </div>
+    </div>
+
+    <!-- 2023-2024 Semester 2 -->
+    <div class="semester-block">
+        <div class="semester-header">Academic Year 2023-2024 - Semester 2</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 6%;">No</th>
+                    <th style="width: 13%;">Course Code</th>
+                    <th class="course-name-col">Course Name</th>
+                    <th style="width: 10%;">Credits</th>
+                    <th style="width: 11%;">Score 10</th>
+                    <th style="width: 11%;">Score 4</th>
+                    <th style="width: 10%;">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">1</td>
+                    <td class="center">1010034</td>
+                    <td class="course-name">National Defense Education *</td>
+                    <td class="center">3.0</td>
+                    <td class="center">6.7</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">2</td>
+                    <td class="center">1010452</td>
+                    <td class="course-name">Marxist-Leninist Political Economy</td>
+                    <td class="center">2.0</td>
+                    <td class="center">4.3</td>
+                    <td class="center">1.00</td>
+                    <td class="grade-cell">D</td>
+                </tr>
+                <tr>
+                    <td class="center">3</td>
+                    <td class="center">1010673</td>
+                    <td class="course-name">General English 2</td>
+                    <td class="center">3.0</td>
+                    <td class="center">6.8</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">4</td>
+                    <td class="center">1221193</td>
+                    <td class="course-name">Linear Algebra</td>
+                    <td class="center">3.0</td>
+                    <td class="center">6.9</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">5</td>
+                    <td class="center">1250074</td>
+                    <td class="course-name">Programming Techniques</td>
+                    <td class="center">4.0</td>
+                    <td class="center">6.2</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="semester-footer">
+            <div class="footer-stat"><span class="label">Total Registered Credits:</span> <span class="val">27</span></div>
+            <div class="footer-stat"><span class="label">Credits Earned:</span> <span class="val">12</span></div>
+            <div class="footer-stat"><span class="label">Semester GPA:</span> <span class="val">1.69</span></div>
+            <div class="footer-stat"><span class="label">Cumulative Credits:</span> <span class="val">30</span></div>
+            <div class="footer-stat"><span class="label">Cumulative GPA:</span> <span class="val">1.92</span></div>
+            <div class="footer-stat"><span class="label">Training Score:</span> <span class="val">74.00/100 (Good)</span></div>
+            <div class="year-avg">Academic Year 2023-2024 Average: 1.69/4.0</div>
+        </div>
+    </div>
+
+    <!-- 2024-2025 Semester 1 -->
+    <div class="semester-block">
+        <div class="semester-header">Academic Year 2024-2025 - Semester 1</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 6%;">No</th>
+                    <th style="width: 13%;">Course Code</th>
+                    <th class="course-name-col">Course Name</th>
+                    <th style="width: 10%;">Credits</th>
+                    <th style="width: 11%;">Score 10</th>
+                    <th style="width: 11%;">Score 4</th>
+                    <th style="width: 10%;">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">1</td>
+                    <td class="center">1010462</td>
+                    <td class="course-name">Scientific Socialism</td>
+                    <td class="center">2.0</td>
+                    <td class="center">5.9</td>
+                    <td class="center">2.00</td>
+                    <td class="grade-cell">C</td>
+                </tr>
+                <tr>
+                    <td class="center">2</td>
+                    <td class="center">1010703</td>
+                    <td class="course-name">General English 3</td>
+                    <td class="center">3.0</td>
+                    <td class="center">8.0</td>
+                    <td class="center">3.50</td>
+                    <td class="grade-cell">B+</td>
+                </tr>
+                <tr>
+                    <td class="center">3</td>
+                    <td class="center">1221014</td>
+                    <td class="course-name">Data Structures and Algorithms</td>
+                    <td class="center">4.0</td>
+                    <td class="center">6.9</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">4</td>
+                    <td class="center">1221084</td>
+                    <td class="course-name">Operating Systems</td>
+                    <td class="center">4.0</td>
+                    <td class="center">6.5</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">5</td>
+                    <td class="center">1230172</td>
+                    <td class="course-name">Soft Skills</td>
+                    <td class="center">2.0</td>
+                    <td class="center">9.5</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A+</td>
+                </tr>
+                <tr>
+                    <td class="center">6</td>
+                    <td class="center">1230214</td>
+                    <td class="course-name">Web Programming</td>
+                    <td class="center">4.0</td>
+                    <td class="center">6.2</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="semester-footer">
+            <div class="footer-stat"><span class="label">Total Registered Credits:</span> <span class="val">31</span></div>
+            <div class="footer-stat"><span class="label">Credits Earned:</span> <span class="val">19</span></div>
+            <div class="footer-stat"><span class="label">Semester GPA:</span> <span class="val">2.76</span></div>
+            <div class="footer-stat"><span class="label">Cumulative Credits:</span> <span class="val">49</span></div>
+            <div class="footer-stat"><span class="label">Cumulative GPA:</span> <span class="val">2.24</span></div>
+            <div class="footer-stat"><span class="label">Training Score:</span> <span class="val">88.00/100 (Very Good)</span></div>
+        </div>
+    </div>
+
+    <!-- 2024-2025 Semester 2 -->
+    <div class="semester-block">
+        <div class="semester-header">Academic Year 2024-2025 - Semester 2</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 6%;">No</th>
+                    <th style="width: 13%;">Course Code</th>
+                    <th class="course-name-col">Course Name</th>
+                    <th style="width: 10%;">Credits</th>
+                    <th style="width: 11%;">Score 10</th>
+                    <th style="width: 11%;">Score 4</th>
+                    <th style="width: 10%;">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">1</td>
+                    <td class="center">1010052</td>
+                    <td class="course-name">General Introduction to Vietnamese Law</td>
+                    <td class="center">2.0</td>
+                    <td class="center">6.8</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">2</td>
+                    <td class="center">1010092</td>
+                    <td class="course-name">Ho Chi Minh Thought</td>
+                    <td class="center">2.0</td>
+                    <td class="center">5.0</td>
+                    <td class="center">1.50</td>
+                    <td class="grade-cell">D+</td>
+                </tr>
+                <tr>
+                    <td class="center">3</td>
+                    <td class="center">1210154</td>
+                    <td class="course-name">Graph Algorithms</td>
+                    <td class="center">4.0</td>
+                    <td class="center">5.0</td>
+                    <td class="center">1.50</td>
+                    <td class="grade-cell">D+</td>
+                </tr>
+                <tr>
+                    <td class="center">4</td>
+                    <td class="center">1221134</td>
+                    <td class="course-name">Computer Networks</td>
+                    <td class="center">4.0</td>
+                    <td class="center">6.4</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">5</td>
+                    <td class="center">1230384</td>
+                    <td class="course-name">Mobile Application Development</td>
+                    <td class="center">4.0</td>
+                    <td class="center">7.6</td>
+                    <td class="center">3.00</td>
+                    <td class="grade-cell">B</td>
+                </tr>
+                <tr>
+                    <td class="center">6</td>
+                    <td class="center">1250084</td>
+                    <td class="course-name">Software Analysis and Design</td>
+                    <td class="center">4.0</td>
+                    <td class="center">8.4</td>
+                    <td class="center">3.50</td>
+                    <td class="grade-cell">B+</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="semester-footer">
+            <div class="footer-stat"><span class="label">Total Registered Credits:</span> <span class="val">36</span></div>
+            <div class="footer-stat"><span class="label">Credits Earned:</span> <span class="val">20</span></div>
+            <div class="footer-stat"><span class="label">Semester GPA:</span> <span class="val">2.50</span></div>
+            <div class="footer-stat"><span class="label">Cumulative Credits:</span> <span class="val">69</span></div>
+            <div class="footer-stat"><span class="label">Cumulative GPA:</span> <span class="val">2.32</span></div>
+            <div class="footer-stat"><span class="label">Training Score:</span> <span class="val">80.00/100 (Very Good)</span></div>
+        </div>
+    </div>
+
+    <!-- 2024-2025 Semester 3 -->
+    <div class="semester-block">
+        <div class="semester-header">Academic Year 2024-2025 - Semester 3</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 6%;">No</th>
+                    <th style="width: 13%;">Course Code</th>
+                    <th class="course-name-col">Course Name</th>
+                    <th style="width: 10%;">Credits</th>
+                    <th style="width: 11%;">Score 10</th>
+                    <th style="width: 11%;">Score 4</th>
+                    <th style="width: 10%;">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">1</td>
+                    <td class="center">1010472</td>
+                    <td class="course-name">History of the Communist Party of Vietnam</td>
+                    <td class="center">2.0</td>
+                    <td class="center">6.3</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">2</td>
+                    <td class="center">1210113</td>
+                    <td class="course-name">Probability and Statistics</td>
+                    <td class="center">3.0</td>
+                    <td class="center">8.2</td>
+                    <td class="center">3.50</td>
+                    <td class="grade-cell">B+</td>
+                </tr>
+                <tr>
+                    <td class="center">3</td>
+                    <td class="center">1221064</td>
+                    <td class="course-name">Software Engineering</td>
+                    <td class="center">4.0</td>
+                    <td class="center">7.2</td>
+                    <td class="center">3.00</td>
+                    <td class="grade-cell">B</td>
+                </tr>
+                <tr>
+                    <td class="center">4</td>
+                    <td class="center">1222024</td>
+                    <td class="course-name">Advanced Database Systems</td>
+                    <td class="center">4.0</td>
+                    <td class="center">5.8</td>
+                    <td class="center">2.00</td>
+                    <td class="grade-cell">C</td>
+                </tr>
+                <tr>
+                    <td class="center">5</td>
+                    <td class="center">1230324</td>
+                    <td class="course-name">Java Programming</td>
+                    <td class="center">4.0</td>
+                    <td class="center">7.5</td>
+                    <td class="center">3.00</td>
+                    <td class="grade-cell">B</td>
+                </tr>
+                <tr>
+                    <td class="center">6</td>
+                    <td class="center">1250134</td>
+                    <td class="course-name">User Interface Design</td>
+                    <td class="center">4.0</td>
+                    <td class="center">7.9</td>
+                    <td class="center">3.00</td>
+                    <td class="grade-cell">B</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="semester-footer">
+            <div class="footer-stat"><span class="label">Total Registered Credits:</span> <span class="val">40</span></div>
+            <div class="footer-stat"><span class="label">Credits Earned:</span> <span class="val">21</span></div>
+            <div class="footer-stat"><span class="label">Semester GPA:</span> <span class="val">2.83</span></div>
+            <div class="footer-stat"><span class="label">Cumulative Credits:</span> <span class="val">90</span></div>
+            <div class="footer-stat"><span class="label">Cumulative GPA:</span> <span class="val">2.44</span></div>
+            <div class="footer-stat"><span class="label">Training Score:</span> <span class="val">78.00/100 (Good)</span></div>
+            <div class="year-avg">Academic Year 2024-2025 Average: 2.70/4.0</div>
+        </div>
+    </div>
+
+    <!-- 2025-2026 Semester 1 -->
+    <div class="semester-block">
+        <div class="semester-header">Academic Year 2025-2026 - Semester 1</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 6%;">No</th>
+                    <th style="width: 13%;">Course Code</th>
+                    <th class="course-name-col">Course Name</th>
+                    <th style="width: 10%;">Credits</th>
+                    <th style="width: 11%;">Score 10</th>
+                    <th style="width: 11%;">Score 4</th>
+                    <th style="width: 10%;">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">1</td>
+                    <td class="center">1010762</td>
+                    <td class="course-name">Physical Education 1 (Table Tennis 1) *</td>
+                    <td class="center">2.0</td>
+                    <td class="center">8.6</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A</td>
+                </tr>
+                <tr>
+                    <td class="center">2</td>
+                    <td class="center">1222034</td>
+                    <td class="course-name">Distributed Database Systems</td>
+                    <td class="center">4.0</td>
+                    <td class="center">9.8</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A+</td>
+                </tr>
+                <tr>
+                    <td class="center">3</td>
+                    <td class="center">1224024</td>
+                    <td class="course-name">Advanced Software Engineering</td>
+                    <td class="center">4.0</td>
+                    <td class="center">6.5</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">4</td>
+                    <td class="center">1230114</td>
+                    <td class="course-name">Software Quality Assurance</td>
+                    <td class="center">4.0</td>
+                    <td class="center">8.0</td>
+                    <td class="center">3.50</td>
+                    <td class="grade-cell">B+</td>
+                </tr>
+                <tr>
+                    <td class="center">5</td>
+                    <td class="center">1250013</td>
+                    <td class="course-name">English for Specific Purposes 1</td>
+                    <td class="center">3.0</td>
+                    <td class="center">7.0</td>
+                    <td class="center">3.00</td>
+                    <td class="grade-cell">B</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="semester-footer">
+            <div class="footer-stat"><span class="label">Total Registered Credits:</span> <span class="val">29</span></div>
+            <div class="footer-stat"><span class="label">Credits Earned:</span> <span class="val">15</span></div>
+            <div class="footer-stat"><span class="label">Semester GPA:</span> <span class="val">3.27</span></div>
+            <div class="footer-stat"><span class="label">Cumulative Credits:</span> <span class="val">105</span></div>
+            <div class="footer-stat"><span class="label">Cumulative GPA:</span> <span class="val">2.56</span></div>
+            <div class="footer-stat"><span class="label">Training Score:</span> <span class="val">89.00/100 (Very Good)</span></div>
+        </div>
+    </div>
+
+    <!-- 2025-2026 Semester 2 -->
+    <div class="semester-block">
+        <div class="semester-header">Academic Year 2025-2026 - Semester 2</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 6%;">No</th>
+                    <th style="width: 13%;">Course Code</th>
+                    <th class="course-name-col">Course Name</th>
+                    <th style="width: 10%;">Credits</th>
+                    <th style="width: 11%;">Score 10</th>
+                    <th style="width: 11%;">Score 4</th>
+                    <th style="width: 10%;">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">1</td>
+                    <td class="center">1010813</td>
+                    <td class="course-name">Physical Education 2 (GYM 2) *</td>
+                    <td class="center">3.0</td>
+                    <td class="center">9.6</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A+</td>
+                </tr>
+                <tr>
+                    <td class="center">2</td>
+                    <td class="center">1221024</td>
+                    <td class="course-name">Database Systems</td>
+                    <td class="center">4.0</td>
+                    <td class="center">6.6</td>
+                    <td class="center">2.50</td>
+                    <td class="grade-cell">C+</td>
+                </tr>
+                <tr>
+                    <td class="center">3</td>
+                    <td class="center">1224034</td>
+                    <td class="course-name">Software Project Management</td>
+                    <td class="center">4.0</td>
+                    <td class="center">9.0</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A+</td>
+                </tr>
+                <tr>
+                    <td class="center">4</td>
+                    <td class="center">1230474</td>
+                    <td class="course-name">Software Design Patterns</td>
+                    <td class="center">4.0</td>
+                    <td class="center">8.5</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A</td>
+                </tr>
+                <tr>
+                    <td class="center">5</td>
+                    <td class="center">1230534</td>
+                    <td class="course-name">Software Quality Guarantee</td>
+                    <td class="center">4.0</td>
+                    <td class="center">7.8</td>
+                    <td class="center">3.00</td>
+                    <td class="grade-cell">B</td>
+                </tr>
+                <tr>
+                    <td class="center">6</td>
+                    <td class="center">1250023</td>
+                    <td class="course-name">English for Specific Purposes 2</td>
+                    <td class="center">3.0</td>
+                    <td class="center">9.0</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A+</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="semester-footer">
+            <div class="footer-stat"><span class="label">Total Registered Credits:</span> <span class="val">38</span></div>
+            <div class="footer-stat"><span class="label">Credits Earned:</span> <span class="val">19</span></div>
+            <div class="footer-stat"><span class="label">Semester GPA:</span> <span class="val">3.47</span></div>
+            <div class="footer-stat"><span class="label">Cumulative Credits:</span> <span class="val">124</span></div>
+            <div class="footer-stat"><span class="label">Cumulative GPA:</span> <span class="val">2.70</span></div>
+            <div class="footer-stat"><span class="label">Training Score:</span> <span class="val">79.00/100 (Good)</span></div>
+        </div>
+    </div>
+
+    <!-- 2025-2026 Semester 3 -->
+    <div class="semester-block">
+        <div class="semester-header">Academic Year 2025-2026 - Semester 3</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 6%;">No</th>
+                    <th style="width: 13%;">Course Code</th>
+                    <th class="course-name-col">Course Name</th>
+                    <th style="width: 10%;">Credits</th>
+                    <th style="width: 11%;">Score 10</th>
+                    <th style="width: 11%;">Score 4</th>
+                    <th style="width: 10%;">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">1</td>
+                    <td class="center">1210112</td>
+                    <td class="course-name">Entrepreneurship</td>
+                    <td class="center">2.0</td>
+                    <td class="center">9.0</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A+</td>
+                </tr>
+                <tr>
+                    <td class="center">2</td>
+                    <td class="center">1211064</td>
+                    <td class="course-name">Business Data Analysis</td>
+                    <td class="center">4.0</td>
+                    <td class="center">9.4</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A+</td>
+                </tr>
+                <tr>
+                    <td class="center">3</td>
+                    <td class="center">1222014</td>
+                    <td class="course-name">Database Management Systems</td>
+                    <td class="center">4.0</td>
+                    <td class="center">8.0</td>
+                    <td class="center">3.50</td>
+                    <td class="grade-cell">B+</td>
+                </tr>
+                <tr>
+                    <td class="center">4</td>
+                    <td class="center">1230633</td>
+                    <td class="course-name">Industrial Internship</td>
+                    <td class="center">3.0</td>
+                    <td class="center">8.5</td>
+                    <td class="center">4.00</td>
+                    <td class="grade-cell">A</td>
+                </tr>
+                <tr>
+                    <td class="center">5</td>
+                    <td class="center">1250364</td>
+                    <td class="course-name">E-Commerce</td>
+                    <td class="center">4.0</td>
+                    <td class="center">7.9</td>
+                    <td class="center">3.00</td>
+                    <td class="grade-cell">B</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="semester-footer">
+            <div class="footer-stat"><span class="label">Total Registered Credits:</span> <span class="val">29</span></div>
+            <div class="footer-stat"><span class="label">Credits Earned:</span> <span class="val">17</span></div>
+            <div class="footer-stat"><span class="label">Semester GPA:</span> <span class="val">3.65</span></div>
+            <div class="footer-stat"><span class="label">Cumulative Credits:</span> <span class="val">141</span></div>
+            <div class="footer-stat"><span class="label">Cumulative GPA:</span> <span class="val">2.81</span></div>
+            <div class="footer-stat"><span class="label">Training Score:</span> <span class="val">100.00/100 (Excellent)</span></div>
+            <div class="year-avg">Academic Year 2025-2026 Average: 3.47/4.0</div>
+        </div>
+    </div>
+
+    <!-- Notes and Declaration -->
+    <div class="bottom-notes">
+        <p><strong>Note:</strong> Courses marked with (*) are not included in cumulative GPA calculation.</p>
+        <p><strong>Declaration:</strong> I hereby certify that all information contained in this academic transcript is accurate and truthful, reflecting my actual academic performance at Ho Chi Minh City University of Foreign Languages and Information Technology (HUFLIT).</p>
+    </div>
+</div>
+
+</body>
+</html>
